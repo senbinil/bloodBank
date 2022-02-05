@@ -1,0 +1,32 @@
+nav .btn{
+    border-radius: 12px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    
+}
+nav .btn:hover,nav .btn:focus{
+    background-color: rgb(255, 30, 30) !important;
+}
+
+.nav-item{
+    margin-right: 5px;
+    margin-left: 5px;
+}
+.banner{
+    padding:5rem !important;
+}
+.superDiv{
+    min-height: 100vh !important;
+}
+ footer{
+    margin-top: auto;
+}
+/* @media screen and (max-width: 1200px) {
+    .superDiv{
+        margin-bottom: 1000px;
+    }
+    .subDiv{
+        min-height: 100vh !important;
+    } */
+
+   

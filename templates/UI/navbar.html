@@ -1,0 +1,43 @@
+<div id="navbar">
+    <nav class="navbar navbar-expand-lg  navbar-dark py-5 bg-danger">
+        <div class="container-fluid">
+            <a class="navbar-brand " href="/"><span class="display-5">Blood Bank</span></a>
+            <button class="navbar-toggler text-white " type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="bi bi-arrow-right-square fs-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{%url 'register:userRegister'%}"><button
+                                class="btn  w-100 btn-lg btn-dark">Registration</button></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{%url 'home:about'%}"><button class="btn w-100 btn-lg btn-dark">About
+                                KBBP</button></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark active" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn w-100 btn-lg btn-dark">Login</button>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{%url 'login:userLogin'%}">User Login</a></li>
+                            {% comment %} <li><a class="dropdown-item" href="#">Another action</a></li> {% endcomment %}
+                            <li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link "><button
+                                class=" animate__animated animate__pulse btn-lg animate__repeat-2 btn w-100  btn-dark text-light">Booking</button></a>
+                    </li>
+                </ul>
+                <!-- <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form> -->
+            </div>
+        </div>
+    </nav>
+</div>

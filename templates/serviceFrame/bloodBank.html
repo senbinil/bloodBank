@@ -1,0 +1,23 @@
+{% extends 'Base/base.html' %}
+
+{% block title %}Blood Bank Request{% endblock title %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <button class="navbar-brand lead">Welcome {{request.user}}</button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a aria-current="page" class="nav-link" href="{%url 'login:logout'%}"><button class="nav-link  text-white btn btn-danger" >Logout</button></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <hr class="my-4">
+  
+{% endblock content %}

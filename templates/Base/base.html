@@ -1,0 +1,27 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {%block style%}{%endblock%}
+    <link
+      rel="stylesheet"
+      href="{% static 'node_modules/bootstrap/dist/css/bootstrap.css'%}"
+    />
+    <link rel="stylesheet" href="../../static/node_modules/bootstrap-icons/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="../../static/homeStyle.css" />
+    <link rel="stylesheet" href="../../static/node_modules/animate.css/animate.css" />
+    <title>{%block title%} Base {%endblock%}</title>
+  </head>
+  <body>
+    {%include 'UI/navbar.html'%}
+    <div class="superDiv">{%block content%}{%endblock%}</div>
+    {%include 'UI/footer.html'%}
+    <script src="{%static 'node_modules/@popperjs/core/dist/umd/popper.js'%}"></script>
+    <script src="{%static 'node_modules/jquery/dist/jquery.js'%}"></script>
+    <script src="{%static 'node_modules/bootstrap/dist/js/bootstrap.js'%}"></script>
+    {%block customScript%}{%endblock%}
+  </body>
+</html>
