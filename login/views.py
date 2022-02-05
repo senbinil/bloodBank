@@ -1,4 +1,4 @@
-import re
+from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth.hashers import make_password,check_password
 from django.contrib.auth.views import LoginView,LogoutView
@@ -24,8 +24,15 @@ class signout(LogoutView):
 @login_required(login_url='login:userLogin')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def requestBlood(request):
+    context={}
+    form=bankRequest(request.POST)
+    context['form']=form
     if request.method=='POST':
-        pass
-
-    return render(request,'serviceFrame/bloodBank.html')
+       if form.is_valid():
+           req=form.save()
+           messages.success(request,'Request Submitted:'+req.pk)
+           return redirect('login:b_request')
+       else:
+            messages.error(request,'Form Invalid')
+    return render(request,'serviceFrame/bloodBank.html',context)
 

@@ -1,13 +1,23 @@
 {% extends 'Base/base.html' %} {% block title %}Login{% endblock title %}
+{%block style%}
+<style>
+  .toastify {
+    font-size: x-large;
+  }
+</style>
+<link
+  rel="stylesheet"
+  href="../../static/node_modules/toastify-js/src/toastify.css"
+/>{%endblock%} 
 {%block content %}
 <div class="content position-relative my-5 ">
     <div class="text-center ">
         <img src="https://st2.depositphotos.com/2924751/7578/i/950/depositphotos_75783241-stock-photo-syringe-pen-drawing.jpg"
             alt="Syringe" class="img img-fluid h-100 opacity-50 shadow rounded" />
     </div>
-    <div class="position-absolute top-50 border border-danger start-50 translate-middle">
+    <div class="position-absolute top-50  start-50 translate-middle">
         <div class="d-flex justify-content-center">
-            <form action="{%url 'login:userLogin'%}" method='POST' class="p-5">
+            <form action="{%url 'login:userLogin'%}" method='POST'>
                 {% csrf_token %}
                 <div class="row  mb-5 text-center">
                     <h4 class="fs-2">Login</h4>
@@ -29,3 +39,26 @@
 </div>
 
 {% endblock content %}
+{% block customScript %}
+{% if form.errors %}
+<script src="../../static/node_modules/toastify-js/src/toastify.js"></script>
+
+    <script>
+        Toastify({
+          text: "username or password incorrect",
+          duration: 3000,
+          newWindow: false,
+          gravity: "bottom", // `top` or `bottom`
+          position: "center", // `left`, `center` or `right`
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          style: {
+              background: "black",
+
+          },
+          // Callback after click
+      }).showToast();
+    </script>
+{% endif %}
+{% endblock customScript %}
+
+

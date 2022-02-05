@@ -16,7 +16,6 @@
       <i class="bi mx-2 text-primary fs-1 bi-person-lines-fill"></i>Registration
     </div>
     <div class="error text-center fs-2 m-5">
-      {{form.errors}}
       <div class="col-md-12">
         {% if messages %}
         <div class="messages alert alert-danger">
@@ -25,16 +24,16 @@
             {% endfor %}
         </div>
         {% endif %}
-        {% if form.errors %}
-            {% for error in forms.errors  %}
+        {% comment %} {% if form.errors %}
+            {% for error in form.errors  %}
                       <strong>{{ error|escape }}</strong>
             {% endfor %}
-        {% for error in form.non_field_errors %}
+        {% comment %} {% comment %} {% for error in form.non_field_errors %}
         <div class="alert alert-danger">
           <strong>{{ error|escape }}</strong>
         </div>
-        {% endfor %}
-        {% endif %}
+        {% endfor %} 
+        {% endif %} {% endcomment %}
       </div>
     </div>
     <div class="register-form border my-4 p-4">
@@ -140,7 +139,8 @@
 <div></div>
 <hr />
 
- {% endblock content %} {% block customScript %}
+ {% endblock content %} 
+ {% block customScript %}
 <script src="../../static/node_modules/toastify-js/src/toastify.js"></script>
 <script>
   const fetchLocation = () => {
@@ -175,7 +175,7 @@
           }).showToast();
       }
   };
-  {%if form.errors %}
+  {% comment %} {%if form.errors %}
         Toastify({
           text: "User Exist",
           duration: 3000,
@@ -189,6 +189,6 @@
           },
           // Callback after click
       }).showToast();
-  {% endif %}
+  {% endif %} {% endcomment %}
 </script>
 {% endblock customScript %}
