@@ -14,7 +14,7 @@ class Registration(UserCreationForm):
     password1 = forms.CharField(help_text='Enter Password',required = True,widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}),)
     password2 = forms.CharField(required = True,help_text='Enter Password Again',widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password Again'}),)
     gender=forms.ChoiceField(choices=[('Male','Male'),('Female','Female')],widget=forms.RadioSelect)
-    pincode=forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Pincode','type':'text'}),)
+    pincode=forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Pincode','type':'text','maxlength':'6','minlength':'6'}),)
     district=forms.CharField(max_length=200,widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'District'}),)
     city=forms.CharField(max_length=200,widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'City'}),)
     blood=forms.ChoiceField(choices=blood,widget=forms.Select(attrs={'class': 'form-control',}),)

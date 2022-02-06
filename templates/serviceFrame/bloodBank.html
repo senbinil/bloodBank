@@ -81,17 +81,37 @@
   const fetchLocation = () => {
       pincode = $("#id_pincode").val();
       const regx = /^\d+$/;
-      if (pincode.match(regx)) {
+      if (pincode.match(regx)) 
+      {
           $.getJSON(
               " https://api.postalpincode.in/pincode/" + pincode,
-              function (data) {
+              function (data)
+            {
+                if (data[0].PostOffice!=null) 
+                {
                   var resData = [
                       data[0].PostOffice[0].Name,
                       data[0].PostOffice[0].District,
                   ];
                   $("#id_district").val(resData[1]);
                   $("#id_city").val(resData[0]);
+                }
+              else{
+                Toastify({
+                  text: "Error: Invalid Pincode!",
+                  duration: 3000,
+                  newWindow: false,
+                  gravity: "bottom", // `top` or `bottom`
+                  position: "right", // `left`, `center` or `right`
+                  stopOnFocus: true, // Prevents dismissing of toast on hover
+                  style: {
+                      background: "red",
+    
+                  },
+                  // Callback after click
+                }).showToast();
               }
+            }
           );
       }
       else {
