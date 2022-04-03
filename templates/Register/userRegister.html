@@ -12,7 +12,7 @@
     <div class="fs-1 border-bottom">
       <i class="bi mx-2 text-primary fs-1 bi-person-lines-fill"></i>Registration
     </div>
-    <div class="error text-center fs-2 m-5">
+    <div class="error  lead m-5">
       <div class="col-md-12">
         {% if messages %}
         <div class="messages alert alert-danger">
@@ -21,24 +21,15 @@
             {% endfor %}
         </div>
         {% endif %}
-        {% comment %} {% if form.errors %}
-        {% for error in form.errors %}
-        <strong>{{ error|escape }}</strong>
-        {% endfor %}
-        {% comment %} {% comment %} {% for error in form.non_field_errors %}
-        <div class="alert alert-danger">
-          <strong>{{ error|escape }}</strong>
-        </div>
-        {% endfor %}
-        {% endif %} {% endcomment %}
       </div>
     </div>
+
     <div class="register-form border my-4 p-4">
       <form action="{% url 'register:userRegister'%}" method="post">
         {% csrf_token %}
         <div class="row my-2">
           <div class="col-sm-4 my-1">{{form.first_name}}
-            <div class="valid-feedback">
+            <div class="small text-danger">
               {% if form.first_name.errors %}
               {% for error in form.first_name.errors %}
               <div>
@@ -48,11 +39,43 @@
               {% endif %}
             </div>
           </div>
-          <div class="col-sm-4 my-1">{{form.last_name}}</div>
-          <div class="col-sm-4 my-1">{{form.dob}}</div>
+          <div class="col-sm-4 my-1">{{form.last_name}}
+            <div class="small text-danger">
+              {% if form.lname.errors %}
+              {% for error in form.lname.errors %}
+              <div>
+                {{ error|escape }}
+              </div>
+              {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-sm-4 my-1">{{form.dob}}
+            <div class="small text-danger">
+              {% if form.dob.errors %}
+              {% for error in form.dob.errors %}
+              <div>
+                {{ error|escape }}
+              </div>
+              {% endfor %}
+              {% endif %}
+            </div>
+          </div>
         </div>
+
         <div class="row my-2">
-          <div class="col-sm-6 my-1">{{form.phone}}</div>
+          <div class="col-sm-6 my-1">{{form.phone}}
+            <div class="small text-danger">
+              {% if form.phone.errors %}
+              {% for error in form.email.errors %}
+              <div>
+                {{ error|escape }}
+              </div>
+              {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+
           <div class="col-sm-6 my-1">
             {% for radio in form.gender %}
             <div class="form-check form-check-inline">
@@ -64,9 +87,20 @@
             {%endfor%}
           </div>
         </div>
+
         <div class="row my-2">
-          <div class="col-sm-6">{{form.email}}</div>
-          <div class="col-sm-6">{{form.blood}}</div>
+          <div class="col-sm-6 my-3">{{form.email}}
+            <div class="small text-danger">
+              {% if form.email.errors %}
+              {% for error in form.email.errors %}
+              <div>
+                {{ error|escape }}
+              </div>
+              {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-sm-6 my-3">{{form.blood}}</div>
         </div>
         <div class="row my-2">
           <div class="col-sm-6 my-3">{{form.password1}}
@@ -95,11 +129,16 @@
         <hr class="my-3" />
         <div class="row">
           <h5 class="my-2">Location</h5>
-          <div class="col-sm-4 my-2">{{form.pincode}}</div>
-          <div class="col-sm-4 my-2">
-            <button class="btn btn-primary" onclick="fetchLocation()" type="button">
-              Fetch Details
-            </button>
+          <div class="col-sm-4 my-2">{{form.pincode}}
+            <div class="small text-danger">
+              {% if form.pincode.errors %}
+              {% for error in form.pin.errors %}
+              <div>
+                {{ error|escape }}
+              </div>
+              {% endfor %}
+              {% endif %}
+            </div>
           </div>
         </div>
         <hr class="my-2" />
@@ -108,8 +147,20 @@
           <div class="row">
             <label for="District" class="col-form-label col-sm-3">District:</label>
             <div class="col-sm-3">{{form.district}}</div>
-            <label for="District" class="col-form-label col-sm-2">City:</label>
-            <div class="col-sm-4">{{form.city}}</div>
+            <div id="city" class="col-sm-6 row mx-0">
+              <label for="District" class="col-form-label col-sm-1">City:</label>
+              <div class="col" >{{form.city}}
+                <div class="small text-danger">
+                  {% if form.city.errors %}
+                  {% for error in form.city.errors %}
+                  <div>
+                    {{ error|escape }}
+                  </div>
+                  {% endfor %}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
           </div>
           <p class="small my-2 text-justify muted">
             *Note: Location details are fetched from Indian Post Office , incase
@@ -144,7 +195,9 @@
               data[0].PostOffice[0].District,
             ];
             $("#id_district").val(resData[1]);
-            $("#id_city").val(resData[0]);
+            $("#id_city").append(`<option value="${resData[0]}" selected>
+              ${resData[0]}
+         </option>`);
           }
           else {
             Toastify({
@@ -181,7 +234,31 @@
     }
   };
 
+{% comment %} Getting City Details {% endcomment %}
 
+$(document).ready(function(){
+  $('#id_district').change(function(){
+    var optionSelect = $(this).find('option:selected')
+    var valueSelected = optionSelect.val()
+    district = optionSelect.text()
+    data = { 'district': district }
+    $.ajax({
+        url: '{%url 'location:getCity'%}',
+        data: data,
+        type: 'get',
+        success: function (result) {
+            var data=JSON.parse(result)
+            $("#id_city option").remove();
+            if(data.length>0)
+                for (var i = data.length - 1; i >= 0; i--) {
+                    $("#id_city").append('<option value='+data[i].name+'>'+ data[i].name +'</option>');
+                }
+        }
+    });
+  })
+})
+
+{% comment %} End of Ajax RQ {% endcomment %}
   {% comment %} 
   {%if form.errors %}
   Toastify({

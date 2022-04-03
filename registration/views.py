@@ -1,5 +1,4 @@
 from django.shortcuts import redirect, render
-
 from registration.forms import Registration
 from django.contrib import messages
 
@@ -22,8 +21,6 @@ def registerHome(request):
                 context = {'form': Registration()}
                 return render(request, 'Register/userRegister.html', context)
         else:
-            print('')
-            print(form.cleaned_data)
             messages.error(request, 'Form is not valid')
             context = {'form': form}
             return render(request, 'Register/userRegister.html', context)
