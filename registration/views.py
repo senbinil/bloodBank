@@ -15,7 +15,7 @@ def registerHome(request):
                 form.save()
                 user = form.cleaned_data.get('email')
                 messages.success(request, 'Account was created for ' + user)
-                return redirect('register:userRegister')
+                return redirect('login:userLogin')
             except:
                 messages.error(request, 'User Exist')
                 context = {'form': Registration()}

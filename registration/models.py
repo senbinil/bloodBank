@@ -38,13 +38,6 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 class RegisterModel(AbstractUser):
-    dob=models.DateField(null=True)
-    gender=models.CharField(max_length=20,null=True)
-    pincode=models.IntegerField(null=True)
-    district=models.CharField(max_length=200,null=True)
-    city=models.CharField(max_length=200,null=True)
-    blood=models.CharField(max_length=10,null=True)
-    phone=models.CharField(max_length=10,null=True)
     email=models.EmailField(unique=True)
     username=None
     USERNAME_FIELD = 'email'

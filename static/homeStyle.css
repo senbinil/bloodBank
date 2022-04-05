@@ -28,5 +28,7 @@ nav .btn:hover,nav .btn:focus{
     .subDiv{
         min-height: 100vh !important;
     } */
-
+ul{
+    list-style-type: none;
+}
    

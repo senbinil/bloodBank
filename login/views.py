@@ -25,7 +25,7 @@ class signout(LogoutView):
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def requestBlood(request):
     context={}
-    form=bankRequest(request.POST)
+    form=bankRequest(request.POST or None)
     context['form']=form
     if request.method=='POST':
        if form.is_valid():

@@ -9,14 +9,31 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+                    {% if not user.is_authenticated %}  
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{%url 'register:userRegister'%}"><button
                                 class="btn  w-100 btn-lg btn-dark">Registration</button></a>
                     </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link active" href="{%url 'home:about'%}"><button class="btn w-100 btn-lg btn-dark">About
                                 KBBP</button></a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark active" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn w-100 btn-lg btn-dark">Place</button>
+                        </a>
+                        <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
+                            <li>District</li>
+                            {% comment %} <li><a class="dropdown-item" href="#">Another action</a></li> {% endcomment %}
+                            <li class="dropdown-divider"></li>
+                            {% for district  in kl_district %}
+                            <li><a class="dropdown-item" href="https://en.wikipedia.org/wiki/{{district|lower}}_district">{{district}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% if  not user.is_authenticated  %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-dark active" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -28,6 +45,7 @@
                             <li>
                         </ul>
                     </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="{%url 'login:b_request'%}"><button
                                 class=" animate__animated animate__pulse btn-lg animate__repeat-2 btn w-100  btn-dark text-light">Booking</button></a>

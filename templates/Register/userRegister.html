@@ -28,67 +28,6 @@
       <form action="{% url 'register:userRegister'%}" method="post">
         {% csrf_token %}
         <div class="row my-2">
-          <div class="col-sm-4 my-1">{{form.first_name}}
-            <div class="small text-danger">
-              {% if form.first_name.errors %}
-              {% for error in form.first_name.errors %}
-              <div>
-                {{ error|escape }}
-              </div>
-              {% endfor %}
-              {% endif %}
-            </div>
-          </div>
-          <div class="col-sm-4 my-1">{{form.last_name}}
-            <div class="small text-danger">
-              {% if form.lname.errors %}
-              {% for error in form.lname.errors %}
-              <div>
-                {{ error|escape }}
-              </div>
-              {% endfor %}
-              {% endif %}
-            </div>
-          </div>
-          <div class="col-sm-4 my-1">{{form.dob}}
-            <div class="small text-danger">
-              {% if form.dob.errors %}
-              {% for error in form.dob.errors %}
-              <div>
-                {{ error|escape }}
-              </div>
-              {% endfor %}
-              {% endif %}
-            </div>
-          </div>
-        </div>
-
-        <div class="row my-2">
-          <div class="col-sm-6 my-1">{{form.phone}}
-            <div class="small text-danger">
-              {% if form.phone.errors %}
-              {% for error in form.email.errors %}
-              <div>
-                {{ error|escape }}
-              </div>
-              {% endfor %}
-              {% endif %}
-            </div>
-          </div>
-
-          <div class="col-sm-6 my-1">
-            {% for radio in form.gender %}
-            <div class="form-check form-check-inline">
-              {{radio.tag}}
-              <label class="form-check-label" for="flexRadioDefault1">
-                {{radio.choice_label}}
-              </label>
-            </div>
-            {%endfor%}
-          </div>
-        </div>
-
-        <div class="row my-2">
           <div class="col-sm-6 my-3">{{form.email}}
             <div class="small text-danger">
               {% if form.email.errors %}
@@ -100,8 +39,8 @@
               {% endif %}
             </div>
           </div>
-          <div class="col-sm-6 my-3">{{form.blood}}</div>
         </div>
+        <hr>
         <div class="row my-2">
           <div class="col-sm-6 my-3">{{form.password1}}
             <div class="lead">
@@ -126,61 +65,20 @@
             </div>
           </div>
         </div>
-        <hr class="my-3" />
-        <div class="row">
-          <h5 class="my-2">Location</h5>
-          <div class="col-sm-4 my-2">{{form.pincode}}
-            <div class="small text-danger">
-              {% if form.pincode.errors %}
-              {% for error in form.pin.errors %}
-              <div>
-                {{ error|escape }}
-              </div>
-              {% endfor %}
-              {% endif %}
+            <div class="d-flex justify-content-center">
+              <input type="submit" value="Register" class="btn my-4 btn-primary p-2" />
             </div>
-          </div>
-        </div>
-        <hr class="my-2" />
-        <div class="row" id="fetchRes">
-          <h5 class="my-2">Location Details</h5>
-          <div class="row">
-            <label for="District" class="col-form-label col-sm-3">District:</label>
-            <div class="col-sm-3">{{form.district}}</div>
-            <div id="city" class="col-sm-6 row mx-0">
-              <label for="District" class="col-form-label col-sm-1">City:</label>
-              <div class="col" >{{form.city}}
-                <div class="small text-danger">
-                  {% if form.city.errors %}
-                  {% for error in form.city.errors %}
-                  <div>
-                    {{ error|escape }}
-                  </div>
-                  {% endfor %}
-                  {% endif %}
-                </div>
-              </div>
-            </div>
-          </div>
-          <p class="small my-2 text-justify muted">
-            *Note: Location details are fetched from Indian Post Office , incase
-            if there is any mistake in any of the details please edit those
-            information kindly.Thank You
-          </p>
-          <input type="submit" value="Register" class="btn my-4 btn-primary p-2" />
         </div>
       </form>
     </div>
   </div>
-</div>
-
-<div></div>
-<hr />
-
 {% endblock content %}
 {% block customScript %}
-<script src="../../static/node_modules/toastify-js/src/toastify.js"></script>
-<script>
+{%load static%}
+<script src="{%static 'node_modules/toastify-js/src/toastify.js'%}"></script>
+<script src="{%static '/node_modules/toastify-js/src/toastify.js'%}"></script>
+<script src="{%static 'common.js'%}"></script>
+<!-- <script>
   
   const fetchLocation = () => {
     pincode = $("#id_pincode").val();
@@ -275,5 +173,5 @@ $(document).ready(function(){
     // Callback after click
   }).showToast();
   {% endif %} {% endcomment %}
-</script>
+</script> -->
 {% endblock customScript %}
